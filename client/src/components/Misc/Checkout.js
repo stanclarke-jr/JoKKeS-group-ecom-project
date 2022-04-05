@@ -11,7 +11,7 @@ const Checkout = () => {
 
   const {
     actions: { dispatchAction, ACTIONS },
-    state: { cart, total },
+    state: { cart, total, order },
   } = useContext(JokkesContext);
 
   const goTo = useNavigate();
@@ -20,29 +20,49 @@ const Checkout = () => {
     dispatchAction(ACTIONS.updateTotal);
   }, []);
 
+  useEffect(() => {
+    if (order != null) goTo("/complete");
+  }, [order]);
+
   const updateState = (myEvent) => {
     let tempState = formData;
     tempState[myEvent.target.name] = myEvent.target.value;
-    setFormData({ ...tempState });
-  };
 
-  useEffect(() => {
     let isValid = true;
-    if (Object.values(formData).length >= 11) {
-      isValid = Object.entries(formData).every(([name, item]) => {
-        if (name === "email") return item.includes("@");
-        return item != null;
+    if (Object.values(tempState).length >= 11) {
+      isValid = Object.entries(tempState).every(([name, item]) => {
+        let isOk = name === "email" ? item.includes("@") : item != null;
+        return isOk;
       });
     } else isValid = false;
 
+    setFormData({ ...tempState });
+
     setDisabled(!isValid);
-  }, [formData, disabled]);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const orderInfo = {
       _id: uuidv4(),
-      ...formData,
+      user: {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+      },
+      savedLocations: {
+        address: formData.address,
+        city: formData.city,
+        province: formData.province,
+        postalCode: formData.postalCode,
+        country: formData.country,
+      },
+      payment: {
+        cardNumber: formData.cardNumber,
+        cardHolder: formData.cardHolder,
+        expiry: formData.expiry,
+      },
+      cart,
     };
     const dispatchData = {
       fetchOptions: {
@@ -53,7 +73,6 @@ const Checkout = () => {
         body: JSON.stringify(orderInfo),
       },
     };
-
     dispatchAction(ACTIONS.checkout, dispatchData);
   };
 
@@ -114,17 +133,17 @@ const Checkout = () => {
             </FlexContainer>
             <FlexContainer>
               <Label>
-                <Input placeholder="Credt card number" maxLength={16} onChange={updateState} required />
+                <Input name="cardNumber" placeholder="Credt card number" maxLength={16} onChange={updateState} required />
               </Label>
             </FlexContainer>
             <FlexContainer>
               <Label>
-                <Input placeholder="Cardholder name" onChange={updateState} required />
+                <Input name="cardHolder" placeholder="Cardholder name" onChange={updateState} required />
               </Label>
             </FlexContainer>
             <FlexContainer>
               <Label>
-                <Input placeholder="Expiration date - (mm/yy)" onChange={updateState} required />
+                <Input name="expiry" placeholder="Expiration date - (mm/yy)" onChange={updateState} required />
               </Label>
             </FlexContainer>
           </PaymentDetails>

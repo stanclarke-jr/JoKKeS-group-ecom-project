@@ -27,11 +27,14 @@ const SingleProduct = () => {
   const closeAlert = (ev) => {
     setAddedToCart("hidden");
   };
+
   useEffect(() => {
-    if (addedToCart === "show")
-      setTimeout(() => {
+    if (addedToCart === "show") {
+      let alert = setTimeout(() => {
         setAddedToCart("hidden");
       }, 5000);
+      return () => clearTimeout(alert);
+    }
   }, [addedToCart]);
 
   return (
