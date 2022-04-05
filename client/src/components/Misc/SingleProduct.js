@@ -66,31 +66,33 @@ const ItemStock = ({ qty, price, handler }) => {
 
 const Wrapper = styled.div`
   font-family: var(--main-font);
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 40px;
 `;
 
 const SectionWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-start;
   padding: 0 20px;
 `;
 
 const ContentWrapper = styled.div`
-  font-size: 24px;
-  margin: 40px 0px 20px 0px;
+  font-size: 18px;
   font-weight: 900;
   display: flex;
   flex-direction: column;
   flex: 1;
+  justify-content: center;
+  margin-left: 25px;
+  margin-right: 50px;
+  max-width: 750px;
 `;
 
 const ItemInfoWrapper = styled.div`
   margin-bottom: 35px;
-  margin-top: 20px;
   display: flex;
   flex-flow: column nowrap;
-  justify-content: center;
 `;
 
 const ItemName = styled.h1`
@@ -99,6 +101,8 @@ const ItemName = styled.h1`
 
 const ItemCategory = styled.h2`
   font-style: italic;
+  padding: 10px 0px 0px 2px;
+  color: var(--purple-color);
 `;
 
 const Img = styled.img`
@@ -113,19 +117,20 @@ const ImageWrapper = styled.div`
   height: 300px;
   margin: 14px;
   padding: 10px;
-  border: var(--main-color) 2px solid;
+  border: var(--light-gray-color) 2px solid;
+  border-radius: 8px;
+  margin: 20px;
 `;
 
 const ItemBuy = styled.div`
-  align-self: center;
   p {
-    margin: 10px 0;
+    margin-top: 15px;
     border-radius: 15px;
     color: white;
     font-size: 24pt;
     width: fit-content;
     padding: 30px 40px;
-    font-size: 24pt;
+    font-size: 22pt;
   }
   .inStock {
     cursor: pointer;
@@ -134,7 +139,8 @@ const ItemBuy = styled.div`
 
   .outOfStock {
     cursor: not-allowed;
-    background-color: red;
+    background-color: #e97452;
+    opacity: 80%;
   }
 `;
 

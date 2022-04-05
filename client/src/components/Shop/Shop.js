@@ -6,7 +6,6 @@ import { JokkesContext } from "../Context/JokkesContext";
 import { Loading } from "../Shared/constants";
 import CategoryShop from "../Home/CategoryShop";
 import PriceFilter from "./PriceFilter";
-import CategoryHome from "../Home/CategoryHome";
 
 const Shop = () => {
   const [sortAscending, setSortAscending] = useState(null);
@@ -101,7 +100,6 @@ const ShopPriceWrapper = styled.div`
 const ShopAllWrapper = styled.div`
   display: flex;
   max-width: 140px;
-  display: flex;
 `;
 
 const PriceFilterWrapper = styled.div`

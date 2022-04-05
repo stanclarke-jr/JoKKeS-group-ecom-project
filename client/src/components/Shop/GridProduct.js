@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { JokkesContext } from "../Context/JokkesContext";
 
-// Truncate product name to 48 characters
+// Truncate product name to 45 characters
 const truncate = (input) => {
   if (input.length > 45) {
     return input.substring(0, 45) + "...";
@@ -18,6 +18,7 @@ const GridProduct = ({ imgSrc, company_id, price, name, id }) => {
 
   const [companyName, setCompanyName] = useState(null);
 
+  // Get company name by matching company id numbers
   useEffect(() => {
     let myCompany = companies.find((company) => company._id === company_id);
     if (myCompany != null) setCompanyName(myCompany.name);

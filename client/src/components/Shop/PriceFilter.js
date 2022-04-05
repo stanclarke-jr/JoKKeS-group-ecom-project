@@ -1,12 +1,9 @@
 import styled from "styled-components";
 import { useEffect, useContext } from "react";
 import { JokkesContext } from "../Context/JokkesContext";
-import { useParams } from "react-router-dom";
-const PriceFilter = ({ toggleAscending }) => {
-  const { category } = useParams();
 
+const PriceFilter = ({ toggleAscending }) => {
   const {
-    state: { categories, companies, locations },
     actions: { dispatchAction, ACTIONS },
   } = useContext(JokkesContext);
 

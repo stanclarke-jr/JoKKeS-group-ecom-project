@@ -18,18 +18,18 @@ const ImageWrapper = styled.div`
   margin-right: auto;
 `;
 
-const Label = styled.div`
-  font-size: 24px;
-  font-weight: 900;
-  margin-top: 8px;
-  color: var(--purple-color);
-`;
-
 const CategoryImg = styled.img`
   width: 300px;
   height: 300px;
   object-fit: cover;
   border-radius: 8px;
+`;
+
+const Label = styled.div`
+  font-size: 24px;
+  font-weight: 900;
+  margin-top: 8px;
+  color: var(--purple-color);
 `;
 
 export default CategoryHome;
