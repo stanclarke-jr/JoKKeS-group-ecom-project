@@ -469,13 +469,48 @@ const updateBodyLocation = async (req, res) => {
 };
 
 const addOrder = async (req, res) => {
-  const orderDetails = req.body.order;
-  const userDetails = req.body.user;
-  //find user
+  const orderDetails = req.body;
+  /*   const userDetails = orderDetails.user;
+  let response, userCreate, userUpdate, createOrder;
+  const newUser = {
+    _id: uuidv4(),
+    ...userDetails,
+    paymentMethods: new Set([orderDetails.payment]),
+    savedLocations: new Set([orderDetails.savedLocations]),
+    orders: new Set([orderDetails._id]),
+  }; 
+  userCreate = await createDBdata("users", newUser);*/
+  const response = await createDBdata("orders", orderDetails);
+  //let status = userCreate.error || createOrder.error ? 400 : 201;
+  /* //find user via Email
   const userExists = await readDBdata("users", { filter: { email: userDetails.email } });
 
-  
-  const response = await createDBdata("orders", req.body);
+  if (userExists.error) response = userExists;
+  else {
+    //user exists?
+    if (userExists.status != 200) {
+      //no, create
+      
+
+      userCreate = await createDBdata("users", newUser);
+      if (userCreate.error) response = userCreate;
+      else {
+        createOrder = await createDBdata("orders", orderDetails);
+      }
+    } else {
+      //Yes, update
+      let updateData = userExists.data;
+      updateData.paymentMethods.add(orderDetails.payment);
+      updateData.savedLocations.add(orderDetails.savedLocations);
+      updateData.orders.push(orderDetails._id);
+
+      userUpdate = updateDBdata("users", {});
+      if (userUpdate.error) response = userUpdate;
+      else {
+        createOrder = await createDBdata("orders", orderDetails);
+      }
+    }
+  } */
   res.status(response.status).json(response);
 };
 

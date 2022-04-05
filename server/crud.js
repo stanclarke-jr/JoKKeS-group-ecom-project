@@ -144,8 +144,8 @@ const readDBdata = async (collName, filters = {}) => {
         response.data = results.length == 1 ? results[0] : results;
       } else {
         //DATA ERROR, no data found.
-        response.status = 404;
-        response.error = true;
+        response.status = 204;
+        response.error = false;
         response.message = "No results found with provided criteria.";
         response.data = results;
       }
