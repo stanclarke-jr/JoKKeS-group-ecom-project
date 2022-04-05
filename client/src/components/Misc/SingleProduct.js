@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useParams } from "react-router-dom";
+import { useParams, NavLink } from "react-router-dom";
 import { useEffect, useContext, useState } from "react";
 import { JokkesContext } from "../Context/JokkesContext";
 import { Loading } from "../Shared/constants";
@@ -39,6 +39,7 @@ const SingleProduct = () => {
 
   return (
     <Wrapper>
+      <ShoppingButton to="../">Back</ShoppingButton>
       {currProduct != null && +currProduct?._id === +itemId ? (
         <SectionWrapper>
           <ImageWrapper>
@@ -56,7 +57,13 @@ const SingleProduct = () => {
             <ItemStock handler={handleClick} qty={currProduct.numInStock} price={currProduct.price} />
           </ContentWrapper>
           <Alert className={addedToCart}>
-            <Msg>Added to Cart!</Msg>
+            <Msg>
+              Added to Cart!
+              <span style={{ fontSize: "16px", fontWeight: "normal" }}>
+                <br />
+                Click here to view cart
+              </span>
+            </Msg>
             <CloseBtn onClick={closeAlert}>&times;</CloseBtn>
           </Alert>
         </SectionWrapper>
@@ -84,6 +91,7 @@ const ItemStock = ({ qty, price, handler }) => {
 };
 
 const Wrapper = styled.div`
+  postion: relative;
   font-family: var(--main-font);
   margin-right: auto;
   margin-left: auto;
@@ -113,7 +121,9 @@ const Alert = styled.div`
   }
 `;
 
-const Msg = styled.div``;
+const Msg = styled.div`
+  font-weight: bold;
+`;
 
 const CloseBtn = styled.div`
   margin-left: 15px;
@@ -197,6 +207,29 @@ const ItemBuy = styled.div`
     cursor: not-allowed;
     background-color: #e97452;
     opacity: 80%;
+  }
+`;
+
+const ShoppingButton = styled(NavLink)`
+  position: absolute;
+  top: 275px;
+  left: 20px;
+  text-decoration: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  height: 60px;
+  background-color: var(--purple-color);
+  font-size: 28px;
+  font-weight: bold;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 20px;
+  transition: 0.3s;
+
+  &:hover {
+    opacity: 0.8;
   }
 `;
 

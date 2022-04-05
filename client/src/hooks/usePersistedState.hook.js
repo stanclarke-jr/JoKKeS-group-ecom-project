@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 
 //
-const getLocalData = (key, fallbackValue) => {
+const getSessionData = (key, fallbackValue) => {
   //Check for saved data, otherwise return fallback
-  // console.log(`getLocalData(key: ${key}, fallbackValue: ${fallbackValue})`);
-  let storedValue = localStorage.getItem(key);
+  // console.log(`getSessionData(key: ${key}, fallbackValue: ${fallbackValue})`);
+  let storedValue = sessionStorage.getItem(key);
   let parsedValue = JSON.parse(storedValue);
 
-  // console.log(`LocalStorage(stored:${storedValue}, parsed: ${parsedValue})`);
+  // console.log(`SessionStorage(stored:${storedValue}, parsed: ${parsedValue})`);
 
   //Compare stored and fallback
   let result = parsedValue != null ? parsedValue : fallbackValue;
@@ -16,32 +16,32 @@ const getLocalData = (key, fallbackValue) => {
   return result;
 };
 
-//Save amount of cookies to localStorage
+//Save amount of cookies to sessionStorage
 const usePersistedState = (value, key) => {
-  //Check for existing data in localStorage
-  let newData = getLocalData(key, value);
+  //Check for existing data in sessionStorage
+  let newData = getSessionData(key, value);
 
   //Create a state to track data
-  //State will be equal to provided value or localStorage value
-  const [localData, setLocalData] = useState(newData);
+  //State will be equal to provided value or sessionStorage value
+  const [sessionData, setSessionData] = useState(newData);
 
-  //Update value in Local storage on state change
+  //Update value in Session storage on state change
   useEffect(() => {
-    console.log(`Update storage status for ${key}`, localData);
-    localStorage.setItem(key, JSON.stringify(localData));
-  }, [localData]);
+    console.log(`Update storage status for ${key}`, sessionData);
+    sessionStorage.setItem(key, JSON.stringify(sessionData));
+  }, [sessionData]);
 
   //Return useState()
-  return [localData, setLocalData];
+  return [sessionData, setSessionData];
 };
 
-export const clearLocalData = (key) => {
-  localStorage.removeItem(key);
+export const clearSessionData = (key) => {
+  sessionStorage.removeItem(key);
 };
 
 const savedState = (value, key) => {
   //Check storage
-  let storedValue = localStorage.getItem(key);
+  let storedValue = sessionStorage.getItem(key);
   //Parse storage
   let parsedValue = JSON.parse(storedValue);
 };

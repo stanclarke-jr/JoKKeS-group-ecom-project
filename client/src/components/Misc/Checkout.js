@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
 import { JokkesContext } from "../Context/JokkesContext";
@@ -79,6 +79,7 @@ const Checkout = () => {
   return (
     <Wrapper>
       <MainHeader>Place your order</MainHeader>
+      <EditCart to="/cart">Edit Cart</EditCart>
       <FormContent onSubmit={handleSubmit}>
         <CartItems>
           {Object.entries(cart).map(([id, item]) => {
@@ -161,6 +162,20 @@ const Wrapper = styled.div`
   flex: 1;
   display: flex;
   flex-flow: column nowrap;
+`;
+
+const EditCart = styled(NavLink)`
+  text-decoration: none;
+  align-self: center;
+  color: white;
+  background-color: var(--purple-color);
+  font-size: 16px;
+  font-weight: bold;
+  border: 0px;
+  border-radius: 10px;
+  padding: 20px 20px;
+  margin: 10px 0;
+  cursor: pointer;
 `;
 
 const CartItems = styled.div`

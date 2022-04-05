@@ -7,7 +7,7 @@ const GlobalStyles = createGlobalStyle`
     --main-font: 'Helvetica', sans-serif;
     --main-color:#4d4b5c;
     --purple-color: #67536e;
-    --text-color: #2a2f36;  
+    --text-color: #4d4b5c;  
     --light-gray-color: #cbbad1; 
   }
 

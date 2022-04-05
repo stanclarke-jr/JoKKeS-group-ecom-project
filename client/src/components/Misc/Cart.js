@@ -32,7 +32,12 @@ const Cart = () => {
           </CartItems>
           <CheckoutWrapper>
             <Total className={Object.entries(cart).length ? "show" : "hidden"}>Total: ${total.toFixed(2)}</Total>
-            <CheckoutButton to={Object.entries(cart).length ? "/checkout" : "/shop"}>{Object.entries(cart).length ? "Checkout" : "Start Shopping"}</CheckoutButton>
+            <Buttons>
+              <CheckoutButton to="/shop">Continue Shopping</CheckoutButton>
+              <CheckoutButton to="/checkout" className={!Object.entries(cart).length && "hide"}>
+                Checkout
+              </CheckoutButton>
+            </Buttons>
           </CheckoutWrapper>
         </Wrapper>
       ) : (
@@ -85,7 +90,38 @@ const EmptyCart = styled.div`
   font-style: italic;
 `;
 
+const Buttons = styled.div`
+  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+`;
+
 const CheckoutButton = styled(NavLink)`
+  text-decoration: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  height: 60px;
+  background-color: var(--purple-color);
+  font-size: 28px;
+  font-weight: bold;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 50px;
+  transition: 0.3s;
+
+  &.hide {
+    display: none;
+  }
+  &:hover {
+    opacity: 0.8;
+  }
+`;
+
+const ShoppingButton = styled(NavLink)`
   text-decoration: none;
   cursor: pointer;
   display: flex;
