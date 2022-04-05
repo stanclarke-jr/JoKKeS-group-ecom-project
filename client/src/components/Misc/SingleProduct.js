@@ -1,12 +1,13 @@
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import { JokkesContext } from "../Context/JokkesContext";
 import { Loading } from "../Shared/constants";
 
 const SingleProduct = () => {
   // useParams to get itemID. Dispatch action to get product details (see CONTEXT DOCS)
   const { itemId } = useParams();
+  const [addedToCart, setAddedToCart] = useState("hidden");
 
   const {
     actions: { dispatchAction, ACTIONS },
@@ -19,8 +20,19 @@ const SingleProduct = () => {
 
   const handleClick = (ev) => {
     ev.preventDefault();
+    setAddedToCart("show");
     dispatchAction(ACTIONS.addToCart, { id: itemId, qty: 1 });
   };
+
+  const closeAlert = (ev) => {
+    setAddedToCart("hidden");
+  };
+  useEffect(() => {
+    if (addedToCart === "show")
+      setTimeout(() => {
+        setAddedToCart("hidden");
+      }, 5000);
+  }, [addedToCart]);
 
   return (
     <Wrapper>
@@ -40,6 +52,10 @@ const SingleProduct = () => {
             </ItemInfoWrapper>
             <ItemStock handler={handleClick} qty={currProduct.numInStock} price={currProduct.price} />
           </ContentWrapper>
+          <Alert className={addedToCart}>
+            <Msg>Added to Cart!</Msg>
+            <CloseBtn onClick={closeAlert}>&times;</CloseBtn>
+          </Alert>
         </SectionWrapper>
       ) : (
         <Loading />
@@ -69,6 +85,43 @@ const Wrapper = styled.div`
   margin-right: auto;
   margin-left: auto;
   margin-top: 40px;
+`;
+
+const Alert = styled.div`
+  position: fixed;
+  inset: auto 20px 50px auto;
+  width: 500px;
+  padding: 20px;
+  background-color: Lavender;
+  color: var(--text-color);
+  margin-bottom: 15px;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+  border-left: 5px solid var(--purple-color);
+  font-size: 18pt;
+
+  &.show {
+    display: flex;
+  }
+
+  &.hidden {
+    display: none;
+  }
+`;
+
+const Msg = styled.div``;
+
+const CloseBtn = styled.div`
+  margin-left: 15px;
+  font-weight: bold;
+  font-size: 22px;
+  cursor: pointer;
+  transition: 0.3s;
+
+  &:hover {
+    opacity: 0.5;
+  }
 `;
 
 const SectionWrapper = styled.div`
