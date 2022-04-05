@@ -39,11 +39,4 @@ export const clearSessionData = (key) => {
   sessionStorage.removeItem(key);
 };
 
-const savedState = (value, key) => {
-  //Check storage
-  let storedValue = sessionStorage.getItem(key);
-  //Parse storage
-  let parsedValue = JSON.parse(storedValue);
-};
-
 export default usePersistedState;

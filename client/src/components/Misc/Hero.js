@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { HERO_IMAGE } from "../Shared/constants";
@@ -13,7 +13,7 @@ const Hero = () => {
   // On click, disable hero page and show home page
   const goHome = () => {
     setShowHeroPage(false);
-      goTo("/");
+    goTo("/");
   };
 
   return (
@@ -58,12 +58,10 @@ const Wrapper = styled.div`
     }
   }
 `;
-
 const Logo = styled.div`
   font-size: 84pt;
   font-weight: bold;
 `;
-
 const Divider = styled.hr`
   width: 75%;
   color: inherit;
@@ -71,11 +69,9 @@ const Divider = styled.hr`
   border-radius: 95%;
   margin: 10px;
 `;
-
 const Slogan = styled.div`
   font-size: 36pt;
 `;
-
 const EnterButton = styled.button`
   display: flex;
   justify-content: center;

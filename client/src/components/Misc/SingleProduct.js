@@ -7,17 +7,19 @@ import { Loading } from "../Shared/constants";
 const SingleProduct = () => {
   // useParams to get itemID. Dispatch action to get product details (see CONTEXT DOCS)
   const { itemId } = useParams();
+  // className state for alert message
   const [addedToCart, setAddedToCart] = useState("hidden");
-
+  // Access actions and state
   const {
     actions: { dispatchAction, ACTIONS },
-    state: { currProduct, allProducts },
+    state: { currProduct },
   } = useContext(JokkesContext);
 
   useEffect(() => {
     dispatchAction(ACTIONS.getProductDetails, { id: itemId }); //Pass the ID as well!!
   }, [itemId]);
 
+  // Click event handler to dispatch action to add an item to the cart
   const handleClick = (ev) => {
     ev.preventDefault();
     setAddedToCart("show");
@@ -89,15 +91,13 @@ const ItemStock = ({ qty, price, handler }) => {
     );
   }
 };
-
 const Wrapper = styled.div`
-  postion: relative;
+  position: relative;
   font-family: var(--main-font);
   margin-right: auto;
   margin-left: auto;
   margin-top: 40px;
 `;
-
 const Alert = styled.div`
   position: fixed;
   inset: auto 20px 50px auto;
@@ -136,13 +136,11 @@ const CloseBtn = styled.div`
     opacity: 0.5;
   }
 `;
-
 const SectionWrapper = styled.div`
   display: flex;
   flex-direction: row;
   padding: 0 20px;
 `;
-
 const ContentWrapper = styled.div`
   font-size: 18px;
   font-weight: 900;
@@ -154,29 +152,24 @@ const ContentWrapper = styled.div`
   margin-right: 50px;
   max-width: 750px;
 `;
-
 const ItemInfoWrapper = styled.div`
   margin-bottom: 35px;
   display: flex;
   flex-flow: column nowrap;
 `;
-
 const ItemName = styled.h1`
   padding: 5px;
 `;
-
 const ItemCategory = styled.h2`
   font-style: italic;
   padding: 10px 0px 0px 2px;
   color: var(--purple-color);
 `;
-
 const Img = styled.img`
   width: 100%;
   height: 100%;
   object-fit: contain;
 `;
-
 const ImageWrapper = styled.div`
   flex: 0 0 300px;
   width: 300px;
@@ -187,7 +180,6 @@ const ImageWrapper = styled.div`
   border-radius: 8px;
   margin: 20px;
 `;
-
 const ItemBuy = styled.div`
   p {
     margin-top: 15px;
@@ -209,7 +201,6 @@ const ItemBuy = styled.div`
     opacity: 80%;
   }
 `;
-
 const ShoppingButton = styled(NavLink)`
   position: absolute;
   top: 275px;

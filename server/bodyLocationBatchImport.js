@@ -7,7 +7,6 @@ const options = {
   useUnifiedTopology: true,
 };
 const items = require("./data/items.json");
-// const companies = require("./data/companies.json");
 
 const { MONGO_URI } = process.env;
 const client = new MongoClient(MONGO_URI, options);

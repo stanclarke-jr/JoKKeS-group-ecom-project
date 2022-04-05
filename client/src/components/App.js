@@ -12,6 +12,7 @@ import Hero from "./Misc/Hero";
 import { JokkesContext } from "./Context/JokkesContext";
 
 function App() {
+  // Access actions and state
   const {
     state: { allProducts, categories, companies },
     actions: { dispatchAction, ACTIONS },
@@ -19,11 +20,12 @@ function App() {
   } = useContext(JokkesContext);
 
   const goTo = useNavigate();
+
   useEffect(() => {
-    console.log("App.js show hero page?", showHeroPage);
     if (showHeroPage) goTo("welcome");
   }, [showHeroPage]);
 
+  // Dispatch actions to fetch all products, categories and companies from MongoDB
   useEffect(() => {
     if (allProducts == null) dispatchAction(ACTIONS.getProducts);
     if (categories == null) dispatchAction(ACTIONS.getCategories);

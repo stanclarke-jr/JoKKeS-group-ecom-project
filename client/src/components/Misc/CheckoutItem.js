@@ -1,25 +1,6 @@
 import styled from "styled-components";
-import { useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { JokkesContext } from "../Context/JokkesContext";
-import { Loading } from "../Shared/constants";
 
-const CheckoutItem = ({ id, item }) => {
-  const {
-    actions: { dispatchAction, ACTIONS },
-  } = useContext(JokkesContext);
-
-  const updateQty = (ev) => {
-    ev.preventDefault();
-    let qty = ev.target.value == 0 ? 1 : ev.target.value;
-    dispatchAction(ACTIONS.addToCart, { id, qty });
-    dispatchAction(ACTIONS.updateTotal);
-  };
-
-  const removeItem = (ev) => {
-    dispatchAction(ACTIONS.removeFromCart, { id, qty: "all" });
-  };
-
+const CheckoutItem = ({ item }) => {
   return (
     <>
       <ItemWrapper>
@@ -58,21 +39,18 @@ const ItemName = styled.h2`
   margin-top: 20px;
   align-self: flex-start;
 `;
-
 const Qty = styled.h3`
   text-align: center;
   font-size: 18pt;
   width: 75px;
   padding: 5px;
 `;
-
 const CartDetails = styled.div`
   flex: 1;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
 `;
-
 const Symbols = styled.h3``;
 const ItemTotal = styled.h3`
   font-size: 18pt;

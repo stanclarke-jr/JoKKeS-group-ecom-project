@@ -23,9 +23,6 @@ const Wrapper = styled.div`
   font-size: 32px;
   z-index: 4;
 `;
-
-export default Complete;
-
 const CheckoutButton = styled(NavLink)`
   text-decoration: none;
   cursor: pointer;
@@ -45,3 +42,5 @@ const CheckoutButton = styled(NavLink)`
     opacity: 0.8;
   }
 `;
+
+export default Complete;

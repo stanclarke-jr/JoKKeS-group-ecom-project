@@ -1,21 +1,20 @@
 import styled from "styled-components";
-import { useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
 import { JokkesContext } from "../Context/JokkesContext";
-import { Loading } from "../Shared/constants";
 
 const CartItem = ({ id, item }) => {
+  // Access actions
   const {
     actions: { dispatchAction, ACTIONS },
   } = useContext(JokkesContext);
-
+  // Dispatch actions to add items to cart and update cart total
   const updateQty = (ev) => {
     ev.preventDefault();
     let qty = ev.target.value == 0 ? 1 : ev.target.value;
     dispatchAction(ACTIONS.addToCart, { id, qty });
     dispatchAction(ACTIONS.updateTotal);
   };
-
+  // Dispatch actions to remove and item from the cart
   const removeItem = (ev) => {
     dispatchAction(ACTIONS.removeFromCart, { id, qty: "all" });
   };
@@ -48,7 +47,6 @@ const RemoveBtn = styled.button`
   font-size: 24pt;
   cursor: pointer;
 `;
-
 const ItemWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
@@ -68,7 +66,6 @@ const ItemName = styled.h2`
   margin-top: 20px;
   align-self: flex-start;
 `;
-
 const QtyInput = styled.input`
   text-align: center;
   font-size: 18pt;
@@ -87,14 +84,12 @@ const QtyInput = styled.input`
     -moz-appearance: textfield;
   }
 `;
-
 const CartDetails = styled.div`
   flex: 1;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
 `;
-
 const Symbols = styled.h3``;
 const ItemTotal = styled.h3`
   font-size: 18pt;

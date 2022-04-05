@@ -10,11 +10,10 @@ const Checkout = () => {
   const [formData, setFormData] = useState({});
 
   const {
+    // Access actions and state
     actions: { dispatchAction, ACTIONS },
     state: { cart, total, order },
   } = useContext(JokkesContext);
-
-  const goTo = useNavigate();
 
   useEffect(() => {
     dispatchAction(ACTIONS.updateTotal);
@@ -27,7 +26,6 @@ const Checkout = () => {
   const updateState = (myEvent) => {
     let tempState = formData;
     tempState[myEvent.target.name] = myEvent.target.value;
-
     let isValid = true;
     if (Object.values(tempState).length >= 11) {
       isValid = Object.entries(tempState).every(([name, item]) => {
@@ -41,6 +39,7 @@ const Checkout = () => {
     setDisabled(!isValid);
   };
 
+  // Dispatch action to POST form data to /api/checkout
   const handleSubmit = (e) => {
     e.preventDefault();
     const orderInfo = {
@@ -192,17 +191,14 @@ const MainHeader = styled.h1`
   text-align: center;
   margin-bottom: 10px;
 `;
-
 const Divider = styled.div`
   border-top: 2px solid rgb(0 0 0 / 0.05);
   margin: 40px 0 20px 0;
 `;
-
 const H2 = styled.h2`
   margin: 40px 0 25px 0;
   text-align: center;
 `;
-
 const OrderDetails = styled.div`
   display: flex;
   justify-content: center;
