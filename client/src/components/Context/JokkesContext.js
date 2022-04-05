@@ -1,6 +1,6 @@
 import { createContext, useReducer, useState } from "react";
 import usePersistedState from "../../hooks/usePersistedState.hook";
-import fakeCart from "../Temp/DummyData";
+
 
 const JokkesContext = createContext(null);
 
@@ -114,7 +114,6 @@ const myReducer = (state, action) => {
       tempState.error.data = action.data;
       break;
     default:
-      console.log("Unknown action", action.type);
       break;
   }
 
